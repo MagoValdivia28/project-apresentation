@@ -3,7 +3,7 @@ import Alunos from "./models/Alunos";
 import Aluno from "./models/Aluno";
 import { useState } from "react";
 import styles from "./page.module.css";
-import 
+
 
 const alunos = new Alunos();
 
@@ -31,44 +31,47 @@ export default function TodoPage() {
 
     function removeTask(event) {
         alunos.remove(event.target.value)
-        console.log(event.target.value)
+        console.log(tasks)
         console.log(alunos)
-        setTesks(alunos.alunos)
+        setTesks(alunos.get())
     }
 
 
     return (
-        <div>
-            <h1>cadastro</h1>
+        
+        <div className={styles.div}>
+            <div>
+            <h1 className={styles.h1}>cadastro</h1>
 
             <div>
-                <input
+                <input className={styles.input}
                     type="text"
                     placeholder="Digite seu  nome"
                     value={task1}
                     onChange={(param) => setTesk1(param.target.value)}
                 />
-                <input
+                <input className={styles.input}
                     type="text"
                     placeholder="Digite ano escolar"
                     value={task2}
                     onChange={(param) => setTesk2(param.target.value)}
                 />
-                <input
+                <input className={styles.input}
                     type="text"
                     placeholder="Digite cor do cabelo"
                     value={task3}
                     onChange={(param) => setTesk3(param.target.value)}
                 />
-                <button onClick={addTask}>Adicionar</button>
+                <button className={styles.btn}onClick={addTask}>Adicionar</button>
+            </div>
             </div>
             {
                 tasks.map((aluno) => (
                     <div key={aluno.id}>
-                        <p><strong>nome:</strong>{aluno.nome}</p>
-                        <p><strong>ano escolar</strong>{aluno.serie}</p>
-                        <p><strong>cor do belo</strong>{aluno.cabelo}</p>
-                        <button onClick={removeTask} value={aluno.id}>Remover</button>
+                        <p><strong>nome: </strong>{aluno.nome}</p>
+                        <p><strong>ano escolar: </strong>{aluno.serie}</p>
+                        <p><strong>cor do belo: </strong>{aluno.cabelo}</p>
+                        <button className={styles.btn2} onClick={removeTask} value={aluno.id}>Remover</button>
                     </div>
                 ))
             }
