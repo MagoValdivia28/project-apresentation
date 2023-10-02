@@ -2,6 +2,8 @@
 import Alunos from "./models/Alunos";
 import Aluno from "./models/Aluno";
 import { useState } from "react";
+import styles from "./page.module.css";
+import 
 
 const alunos = new Alunos();
 
@@ -11,9 +13,6 @@ export default function TodoPage() {
     const [task3, setTesk3] = useState('')
     const [tasks, setTesks] = useState([])
 
-    function teste() {
-        console.log(task)
-    }
     const addTask = () => {
 
         if (task1.trim() && task2.trim() && task3 !== '') {
@@ -21,12 +20,20 @@ export default function TodoPage() {
 
             alunos.add(novoAluno)
 
+            setTesks([...tasks, novoAluno])
             setTesk1('')
             setTesk2('')
             setTesk3('')
         } else {
             throw new Error('Digite um valor valido');
         }
+    }
+
+    function removeTask(event) {
+        alunos.remove(event.target.value)
+        console.log(event.target.value)
+        console.log(alunos)
+        setTesks(alunos.alunos)
     }
 
 
@@ -56,12 +63,12 @@ export default function TodoPage() {
                 <button onClick={addTask}>Adicionar</button>
             </div>
             {
-                alunos.alunos.map((aluno) => (
+                tasks.map((aluno) => (
                     <div key={aluno.id}>
-                        <h1>{aluno.nome}</h1>
-                        <h1>{aluno.serie}</h1>
-                        <h1>{aluno.cabelo}</h1>
-                        <button onClick={() => alunos.remove(aluno.id)}>Remover</button>
+                        <p><strong>nome:</strong>{aluno.nome}</p>
+                        <p><strong>ano escolar</strong>{aluno.serie}</p>
+                        <p><strong>cor do belo</strong>{aluno.cabelo}</p>
+                        <button onClick={removeTask} value={aluno.id}>Remover</button>
                     </div>
                 ))
             }
