@@ -1,6 +1,6 @@
 "use client";
-import Alunos from "./models/Alunos";
-import Aluno from "./models/Aluno";
+import Alunos from "../models/Alunos";
+import Aluno from "../models/Aluno";
 import { useState } from "react";
 import styles from "./page.module.css";
 
@@ -15,7 +15,7 @@ export default function TodoPage() {
 
     const addTask = () => {
 
-        if (task1.trim() && task2.trim() && task3 !== '') {
+        if (task1.trim() && task2.trim() && task3.trim() !== '') {
             const novoAluno = new Aluno(task1, task2, task3)
 
             alunos.add(novoAluno)
